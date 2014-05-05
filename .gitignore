@@ -1,0 +1,6 @@
+/vendor
+/projectfiles
+composer.phar
+composer.lock
+.DS_Store
+roles.json

@@ -1,0 +1,37 @@
+{
+    "name": "bonaccorsop/rolethemall-laravel",
+    "description": "A Laravel 4 library for manage roles and capabilities",
+    "keywords": [
+        "laravel",
+        "roles",
+        "capabilities",
+        "server",
+        "filters"
+    ],
+    "authors": [
+        {
+            "name": "Pietro Bonaccorso",
+            "email": "bonaccorso.p@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.22",
+        "mockery/mockery": ">=0.7.2",
+        "orchestra/testbench": "2.1.*",
+        "squizlabs/php_codesniffer": "1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "tests/TestCase.php",
+            "src/"
+        ],
+        "psr-0": {
+            "bonaccorsop\\RoleThemAll": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "license": "MIT"
+}
