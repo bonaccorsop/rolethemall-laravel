@@ -16,10 +16,10 @@ before_script:
   - php composer.phar install --dev --no-interaction
   - wget https://scrutinizer-ci.com/ocular.phar
 script:
-  - mkdir -p tmp
-  - phpunit --configuration phpunit.xml
+  - mkdir -p build/logs
+  - phpunit --coverage-clover build/logs/clover.xml
 after_script:
-  - php ocular.phar code-coverage:upload --format=php-clover tmp/coverage.clover
+  - php vendor/bin/coveralls -v
 
 cache:
   directories:
