@@ -75,12 +75,18 @@ class Role
 	 *
 	 * Determines if the current RoleInterface has the specified capability
 	 *
-	 * @param string $capabilityName
+	 * @param mixed $capabilityName
 	 * @return bool
 	 */
 	public function can( $capabilityName )
 	{
-		return in_array( $capabilityName, Decoders::decodeList( $this->find( $this->role ), RolesParser::CAPABILITIES_KEY ) );
+		foreach ( Decoders::decodeList( $capabilityName ) as $capab ) {
+			if( ! in_array( $capab, Decoders::decodeList( $this->find( $this->role ), RolesParser::CAPABILITIES_KEY ) ) ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 
@@ -108,7 +114,7 @@ class Role
 	 *
 	 * Throw an Exception if the current RoleInterface is a hasn't the specified capability
 	 *
-	 * @param string $capabilityName
+	 * @param mixed $capabilityName
 	 * @throw bonaccorsop\RoleThemAll\Exceptions\ForbiddenException
 	 * @return bool
 	 */

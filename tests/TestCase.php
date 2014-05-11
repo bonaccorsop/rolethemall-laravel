@@ -4,6 +4,18 @@ class TestCase extends Orchestra\Testbench\TestCase {
 
 
 
+	protected function getPackageProviders()
+    {
+        return array('bonaccorsop\RoleThemAll\RoleServiceProvider');
+    }
+
+    protected function getPackageAliases()
+    {
+        return array(
+            'Role' => 'bonaccorsop\RoleThemAll\Role',
+        );
+    }
+
 
 	public function getConfigArray()
 	{

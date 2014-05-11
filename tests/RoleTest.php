@@ -79,7 +79,7 @@ class RoleTest extends TestCase
     public function roleCapabilitiesDataProvider()
 	{
 		return array(
-			array( 'god', true, 'develop' ),
+			array( 'god', true, array( 'develop', 'discover' ) ),
 			array( 'user', false, 'develop' ),
 			array( 'revisor', true, 'discover' ),
 			array( 'admin', true, 'discover' ),
@@ -87,6 +87,9 @@ class RoleTest extends TestCase
 			array( 'god', true, 'notify' ),
 			array( 'admin', false, 'develop' ),
 			array( 'user', false, 'develop' ),
+			array( 'user', true, array( 'discover' ) ),
+			array( 'user', false, array( 'discover', 'develop' ) ),
+			array( 'user', true, 'discover' ),
 			array( 'revisor', false, 'create' ),
 		);
 	}

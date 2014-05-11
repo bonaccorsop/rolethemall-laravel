@@ -1,6 +1,6 @@
 {
     "name": "bonaccorsop/rolethemall-laravel",
-    "description": "A Laravel 4 library for manage roles and capabilities",
+    "description": "A Laravel library for manage roles and capabilities",
     "keywords": [
         "laravel",
         "roles",
