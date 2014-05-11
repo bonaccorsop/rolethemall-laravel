@@ -5,7 +5,6 @@
         "laravel",
         "roles",
         "capabilities",
-        "server",
         "filters"
     ],
     "authors": [

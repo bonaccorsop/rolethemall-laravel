@@ -19,7 +19,7 @@ class TestCase extends Orchestra\Testbench\TestCase {
 
 				'admin' => array(
 					'aliases' => array( 'administrator', 'manager' ),
-					'childs' => array( 'revisor', 'user' ),
+					'childs' => array( 'revisor' ),
 					'capabilities' => array( 'manage', 'notify', 'manage' )
 				),
 
@@ -31,13 +31,13 @@ class TestCase extends Orchestra\Testbench\TestCase {
 
 				'user' => array(
 					'aliases' => array( 'navigator', 'browser' ),
-					'capabilities' => array( 'browse', 'discover' )
+					'capabilities' => array( 'browse', 'discover' ),
 				),
 			)
 		);
 	}
 
-	public function getDictionary( $config = NULL )
+	public function getParser( $config = NULL )
 	{
 
 		$config = ! empty( $config ) ? $config : $this->getConfigArray();
@@ -45,15 +45,28 @@ class TestCase extends Orchestra\Testbench\TestCase {
 		$ConfigLoaderClass = 'bonaccorsop\RoleThemAll\ConfigLoader';
     	$configLoader = \Mockery::mock( $ConfigLoaderClass, array( 'make' => $config ) );
 
-    	$dictionary = new bonaccorsop\RoleThemAll\Dictionary( $configLoader );
+    	$provider = new bonaccorsop\RoleThemAll\RolesParser( $configLoader );
 
-    	return $dictionary;
+    	return $provider;
 	}
 
 
-	public function assertEqualsArray( $expectedArray, $array, $message = null )
+
+	public function assertStructEquals( $expected, $check, $message = null )
 	{
-		$this->assertEquals( count( $expectedArray ), count( $array ), $message );
+
+		$h1 = strlen( $this->hashDataStruct( $expected ) );
+		$h2 = strlen( $this->hashDataStruct( $check ) );
+
+		$this->assertEquals( $h1, $h2, $message );
+	}
+
+
+	public function hashDataStruct( $struct )
+	{
+		$array = str_split( serialize( $struct ) );
+		sort( $array );
+		return implode( '', $array );
 	}
 
 }
