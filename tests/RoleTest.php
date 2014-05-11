@@ -1,7 +1,7 @@
 <?php
 
 use \Mockery;
-use bonaccorsop\RoleThemAll\Interfaces\RoleInterface as RoleInterface;
+use bonaccorsop\RoleThemAll\Interfaces\RoleInterface;
 
 class RoleTest extends TestCase
 {
@@ -18,10 +18,10 @@ class RoleTest extends TestCase
 	}
 
 
-	public function testCurrent()
+	public function testCurrentRole()
     {
     	$role = $this->getRole( 'revisor' );
-    	$this->assertEquals( 'revisor', $role->current() );
+    	$this->assertEquals( 'revisor', $role->role() );
     }
 
 

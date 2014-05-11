@@ -1,7 +1,7 @@
 <?php namespace bonaccorsop\RoleThemAll;
 
 use Illuminate\Support\ServiceProvider;
-use bonaccorsop\RoleThemAll\Role;
+
 
 class RoleServiceProvider extends ServiceProvider
 {
@@ -20,9 +20,15 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package( 'bonaccorsop/rolethemall-laravel', 'bonaccorsop/rolethemall-laravel' );
+        $this->package( 'bonaccorsop/rolethemall', 'bonaccorsop/rolethemall' );
 
         require_once __DIR__ . '/../../filters.php';
+
+        //facade it
+        $this->app->bind( 'Role', function() {
+            return new Role( new RolesParser( new ConfigLoader ) );
+        } );
+
     }
 
     /**
@@ -33,7 +39,7 @@ class RoleServiceProvider extends ServiceProvider
     public function register()
     {
         // let's bind the interfaces to the implementations
-        $app = $this->app;
+        //$app = $this->app;
 
     }
 

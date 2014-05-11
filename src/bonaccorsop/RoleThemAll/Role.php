@@ -1,36 +1,65 @@
 <?php namespace bonaccorsop\RoleThemAll;
 
+
 use bonaccorsop\RoleThemAll\RolesParser as RolesParser;
+use bonaccorsop\RoleThemAll\Decoders as Decoders;
+use bonaccorsop\RoleThemAll\Interfaces;
+
+use Auth;
 
 class Role
 {
 
 	private $parsed;
+	private $user;
 	private $role;
 
 	/**
 	 * __construct
 	 *
 	 * @param RolesParser $parser
-	 * @param RoleInterface $roler
+	 * @param RoleInterface $roler (optional)
 	 */
-	public function __construct( RolesParser $parser, $roler )
+	public function __construct( RolesParser $parser, /*RoleInterface*/ $user = null )
 	{
 		$this->parsed = $parser->parse();
-		$this->role = $roler->getRole();
+		if( $user ) {
+			$this->user = $user;
+			$this->role = $user->getRole();
+		}
 	}
 
+	protected static function getFacadeAccessor()
+	{
+		return 'role';
+	}
+
+
 	/**
-	 * current
+	 * user
 	 *
-	 * Retrive the Current Logged Role
+	 * Retrive the Current Logged User
 	 *
 	 * @return string
 	 */
-	public function current()
+	public function user()
 	{
-		return $this->role;
+		return $this->user ? $this->user : Auth::user();
 	}
+
+
+	/**
+	 * user
+	 *
+	 * Retrive the Current Logged User's Role
+	 *
+	 * @return string
+	 */
+	public function role()
+	{
+		return $this->role ? $this->role : $this->user()->getRole();
+	}
+
 
 
 	/**
@@ -65,7 +94,7 @@ class Role
 	 */
 	public function is( $roleName )
 	{
-		$hierarchy = Decoders::decodeList( $this->find( $this->role ), RolesParser::CHILDS_KEY );
+		$hierarchy = Decoders::decodeList( $this->find( $this->role() ), RolesParser::CHILDS_KEY );
 		return in_array( $roleName, $hierarchy );
 	}
 
@@ -81,7 +110,7 @@ class Role
 	public function can( $capabilityName )
 	{
 		foreach ( Decoders::decodeList( $capabilityName ) as $capab ) {
-			if( ! in_array( $capab, Decoders::decodeList( $this->find( $this->role ), RolesParser::CAPABILITIES_KEY ) ) ) {
+			if( ! in_array( $capab, Decoders::decodeList( $this->find( $this->role() ), RolesParser::CAPABILITIES_KEY ) ) ) {
 				return false;
 			}
 		}

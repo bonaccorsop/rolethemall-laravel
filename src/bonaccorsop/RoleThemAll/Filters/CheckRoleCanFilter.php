@@ -1,6 +1,6 @@
 <?php namespace bonaccorsop\RoleThemAll\Filters;
 
-use bonaccorsop\RoleThemAll\Role;
+//use bonaccorsop\RoleThemAll\Role;
 
 class CheckRoleCanFilter
 {
