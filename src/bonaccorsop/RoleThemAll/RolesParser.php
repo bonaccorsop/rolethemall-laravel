@@ -5,6 +5,7 @@ use bonaccorsop\RoleThemAll as RTA;
 class RolesParser
 {
 
+
 	private $config = null;
 
 	public $lockedRole;
