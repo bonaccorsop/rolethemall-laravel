@@ -65,8 +65,8 @@ class RolesParserTest extends TestCase
 	public function resolveDataProvider()
 	{
 
-		return [
-			[
+		return array(
+			array(
 				$this->getConfigArray(),
 				'god',
 				array(
@@ -74,8 +74,8 @@ class RolesParserTest extends TestCase
 					'childs' => array( 'god', 'admin', 'revisor', 'user' ),
 					'capabilities' => array( 'develop', 'create', 'manage', 'notify', 'review', 'browse', 'discover' )
 				)
-			],
-			[
+			),
+			array(
 				$this->getConfigArray(),
 				'admin',
 				array(
@@ -83,8 +83,8 @@ class RolesParserTest extends TestCase
 					'childs' => array( 'admin', 'revisor', 'user' ),
 					'capabilities' => array( 'manage', 'notify', 'review', 'browse', 'discover' )
 				)
-			],
-			[
+			),
+			array(
 				$this->getConfigArray(),
 				'revisor',
 				array(
@@ -92,8 +92,8 @@ class RolesParserTest extends TestCase
 					'childs' => array( 'revisor', 'user' ),
 					'capabilities' => array( 'notify', 'review', 'browse', 'discover' )
 				)
-			],
-		];
+			),
+		);
 	}
 
 	/**
