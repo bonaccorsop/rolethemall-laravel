@@ -1,6 +1,6 @@
 <?php namespace bonaccorsop\RoleThemAll;
 
-
+use bonaccorsop\RoleThemAll\RolesParser as RolesParser;
 
 class Role
 {
@@ -80,7 +80,7 @@ class Role
 	 */
 	public function can( $capabilityName )
 	{
-		return in_array( $capabilityName, Decoders::decodeList( $this->find( $this->role ), RolesParser::CAPABILTIES_KEY ) );
+		return in_array( $capabilityName, Decoders::decodeList( $this->find( $this->role ), RolesParser::CAPABILITIES_KEY ) );
 	}
 
 
